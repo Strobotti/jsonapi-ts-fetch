@@ -36,7 +36,7 @@
     "lib/**/*"
   ],
   "dependencies": {
-    "jsonapi-ts-deserializer": "github:Strobotti/jsonapi-ts-deserializer#stronger-types"
+    "jsonapi-ts-deserializer": "^2.1.0"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
