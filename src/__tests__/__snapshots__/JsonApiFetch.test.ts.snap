@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`JsonApiFetch deserializes the second file system example (single entity) into an object graph 1`] = `
+{
+  "data": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "id": 4,
+              "name": "README.md",
+            },
+            {
+              "children": [],
+              "id": 5,
+              "name": "juha",
+            },
+          ],
+          "id": 2,
+          "name": "home",
+        },
+        {
+          "id": 3,
+          "name": "swapfile",
+        },
+      ],
+      "id": 1,
+      "name": "root",
+    },
+  ],
+}
+`;
+
+exports[`JsonApiFetch deserializes the third file system example (single entity with relationships.children.links) into an object graph 1`] = `
+{
+  "data": [
+    {
+      "children": [],
+      "id": 1,
+      "name": "root",
+    },
+  ],
+}
+`;
+
+exports[`JsonApiFetch fetches a file system example into an object graph 1`] = `
+{
+  "data": [
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "id": 4,
+              "name": "README.md",
+            },
+            {
+              "children": [],
+              "id": 5,
+              "name": "juha",
+            },
+          ],
+          "id": 2,
+          "name": "home",
+        },
+        {
+          "id": 3,
+          "name": "swapfile",
+        },
+      ],
+      "id": 1,
+      "name": "root",
+    },
+  ],
+}
+`;
+
+exports[`JsonApiFetch fetches an array 1`] = `
+{
+  "data": [
+    {
+      "author": {
+        "firstName": "Dan",
+        "id": 9,
+        "lastName": "Gebhardt",
+        "twitter": "dgeb",
+      },
+      "comments": [
+        {
+          "author": {
+            "firstName": "John",
+            "id": 2,
+            "lastName": "Doe",
+            "twitter": "jdoe",
+          },
+          "body": "First!",
+          "id": 5,
+        },
+        {
+          "author": {
+            "firstName": "Dan",
+            "id": 9,
+            "lastName": "Gebhardt",
+            "twitter": "dgeb",
+          },
+          "body": "I like XML better",
+          "id": 12,
+        },
+      ],
+      "id": 1,
+      "title": "JSON:API paints my bikeshed!",
+    },
+  ],
+  "links": {
+    "last": "https://example.com/articles?page[offset]=10",
+    "next": "https://example.com/articles?page[offset]=2",
+    "self": "https://example.com/articles",
+  },
+}
+`;
+
+exports[`JsonApiFetch fetches an array without some or all relationships 1`] = `
+{
+  "data": [
+    {
+      "author": null,
+      "comments": [],
+      "id": 1,
+      "title": "JSON:API paints my bikeshed!",
+    },
+  ],
+  "links": {
+    "last": "https://example.com/articles?page[offset]=10",
+    "next": "https://example.com/articles?page[offset]=2",
+    "self": "https://example.com/articles",
+  },
+}
+`;
