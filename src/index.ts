@@ -20,7 +20,7 @@ export type JsonApiItem = {
   id: string | null;
   attributes?: JsonApiAttributes;
   relationships?: {
-    [key: string]: unknown;
+    [key: string]: any;
   };
 };
 
@@ -29,17 +29,17 @@ export type GetParams = {
   page?: number | null;
   limit?: number | null;
   filters?: {
-    [key: string]: unknown;
+    [key: string]: any;
   };
 };
 
 export type JsonApiResponse<T> = {
   data: T | T[];
   links?: {
-    [key: string]: unknown;
+    [key: string]: string | null;
   };
   meta?: {
-    [key: string]: unknown;
+    [key: string]: any;
   };
 };
 
@@ -63,13 +63,13 @@ export type EntitySerializer<T> = {
  * @param deserializer
  * @param serializer
  */
-export default function useJsonApiFetch<T>(
+const useJsonApiFetch = <T>(
   fetch: Fetch,
   route: string,
   deserializer: Deserializer,
   serializer?: EntitySerializer<T>,
-): JsonApiFetch<T> {
-  function consumeRootItem(data: any): JsonApiResponse<T> {
+): JsonApiFetch<T> => {
+  const consumeRootItem = (data: any): JsonApiResponse<T> => {
     const rootItem: T = deserializer.consume(data).getRootItem();
     const response: JsonApiResponse<T> = {
       data: rootItem,
@@ -79,7 +79,7 @@ export default function useJsonApiFetch<T>(
     if (data.meta !== undefined) response.meta = data.meta;
 
     return response;
-  }
+  };
 
   return {
     find: (params: GetParams, includes: string[]): Promise<JsonApiResponse<T>> => {
@@ -89,7 +89,7 @@ export default function useJsonApiFetch<T>(
         const filters = params.filters;
 
         Object.keys(filters).forEach((key: string) => {
-          const val = filters[key];
+          const val = filters[key] as string;
           paramsArray.push(`filter[${key}]=${val}`);
         });
       }
@@ -145,7 +145,7 @@ export default function useJsonApiFetch<T>(
       }
 
       const item = serializer.serialize(entity);
-      const url = route + '/' + item.id + (includes.length > 0 ? '?include=' + includes.join(',') : '');
+      const url: string = route + '/' + (item.id ?? '') + (includes.length > 0 ? '?include=' + includes.join(',') : '');
 
       return fetch
         .patch(url, { data: item })
@@ -185,4 +185,6 @@ export default function useJsonApiFetch<T>(
       });
     },
   };
-}
+};
+
+export default useJsonApiFetch;
