@@ -11,7 +11,6 @@ JSON:API response payload. A `Fetch`-interface needs to be implemented to fetch 
 the package can be used in any environment (browser, node, react-native, etc.) and the user can use any HTTP library
 with any kind of authentication scenario necessary.
 
-
 ## Installation
 
 ```shell
