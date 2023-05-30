@@ -36,7 +36,7 @@
     "lib/**/*"
   ],
   "peerDependencies": {
-    "jsonapi-ts-deserializer": "Strobotti/jsonapi-ts-deserializer#stricter-types"
+    "jsonapi-ts-deserializer": "2.3.x"
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
