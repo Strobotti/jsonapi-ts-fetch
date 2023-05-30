@@ -34,13 +34,11 @@ exports[`JsonApiFetch deserializes the second file system example (single entity
 
 exports[`JsonApiFetch deserializes the third file system example (single entity with relationships.children.links) into an object graph 1`] = `
 {
-  "data": [
-    {
-      "children": [],
-      "id": 1,
-      "name": "root",
-    },
-  ],
+  "data": {
+    "children": [],
+    "id": 1,
+    "name": "root",
+  },
 }
 `;
 
