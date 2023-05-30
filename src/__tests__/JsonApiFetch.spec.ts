@@ -438,7 +438,7 @@ describe('JsonApiFetch', () => {
 
     const jsonApiFetch: JsonApiFetch<Article> = useJsonApiFetch(fetch, '/does/not/matter', deserializer);
 
-    jsonApiFetch.find({}, []).then((response: JsonApiResponse<Article>) => {
+    jsonApiFetch.find({}, ['author', 'comments']).then((response: JsonApiResponse<Article>) => {
       expect(response).toMatchSnapshot();
     });
   });
@@ -460,7 +460,7 @@ describe('JsonApiFetch', () => {
 
     const jsonApiFetch: JsonApiFetch<Folder> = useJsonApiFetch(fetch, '/does/not/matter', deserializer);
 
-    jsonApiFetch.find({}, []).then((response: JsonApiResponse<Folder>) => {
+    jsonApiFetch.find({}, ['children']).then((response: JsonApiResponse<Folder>) => {
       expect(response).toMatchSnapshot();
     });
   });
@@ -471,7 +471,7 @@ describe('JsonApiFetch', () => {
 
     const jsonApiFetch: JsonApiFetch<Folder> = useJsonApiFetch(fetch, '/does/not/matter', deserializer);
 
-    jsonApiFetch.find({}, []).then((response: JsonApiResponse<Folder>) => {
+    jsonApiFetch.find({}, ['children']).then((response: JsonApiResponse<Folder>) => {
       expect(response).toMatchSnapshot();
     });
   });
@@ -482,7 +482,7 @@ describe('JsonApiFetch', () => {
 
     const jsonApiFetch: JsonApiFetch<Folder> = useJsonApiFetch(fetch, '/does/not/matter', deserializer);
 
-    jsonApiFetch.find({}, []).then((response: JsonApiResponse<Folder>) => {
+    jsonApiFetch.findOne('1', []).then((response: JsonApiResponse<Folder>) => {
       expect(response).toMatchSnapshot();
     });
   });
