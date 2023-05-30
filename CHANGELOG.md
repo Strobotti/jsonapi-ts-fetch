@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/Strobotti/jsonapi-ts-fetch/compare/v1.0.1...v1.1.0) (2023-05-30)
+
+
+### Features
+
+* bump version ([efa4426](https://github.com/Strobotti/jsonapi-ts-fetch/commit/efa44266f8270e079d31425016098770d36266e1))
+
 ## [1.0.1](https://github.com/Strobotti/jsonapi-ts-fetch/compare/v1.0.0...v1.0.1) (2023-05-22)
 
 
