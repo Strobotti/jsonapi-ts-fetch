@@ -20,7 +20,7 @@ npm i jsonapi-ts-fetch
 ## Usage
 
 ```typescript
-import { Fetch, getDeserializer, ItemDeserializer, RelationshipDeserializer, GetParams } from 'jsonapi-ts-fetch';
+import { getJsonApiFetch, Fetch, getDeserializer, ItemDeserializer, RelationshipDeserializer, GetParams } from 'jsonapi-ts-fetch';
 
 // Introduce types for your entities, the folder:
 type Folder = {
@@ -69,7 +69,7 @@ const deserializer = getDeserializer([
 ]);
 
 // create a fetcher:
-export default function useFetch(): Fetch {
+const myFetch = (): Fetch => {
   return {
     get: request('GET'),
     post: request('POST'),
@@ -101,7 +101,7 @@ export default function useFetch(): Fetch {
 }
 
 // use the JsonapiFetcher:
-const jsonApiFetch: JsonApiFetch<Folder> = useJsonApiFetch(fetch, '/api/v1/folders', deserializer);
+const jsonApiFetch: JsonApiFetch<Folder> = getJsonApiFetch(myFetch, '/api/v1/folders', deserializer);
 
 // Filter by your heart's content:
 const params: GetParams = {
