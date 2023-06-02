@@ -56,14 +56,14 @@ export type EntitySerializer<T> = {
 };
 
 /**
- * A generic service for interacting with a JSON:API endpoint
+ * Instantiate a generic service for interacting with a JSON:API endpoint
  *
  * @param fetch
  * @param route
  * @param deserializer
  * @param serializer
  */
-const useJsonApiFetch = <T>(
+export const getJsonApiFetch = <T>(
   fetch: Fetch,
   route: string,
   deserializer: Deserializer,
@@ -187,4 +187,7 @@ const useJsonApiFetch = <T>(
   };
 };
 
-export default useJsonApiFetch;
+/**
+ * @deprecated Use getJsonApiFetch instead: this is not really a React hook so lets not call it that
+ */
+export default getJsonApiFetch;

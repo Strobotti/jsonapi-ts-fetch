@@ -5,7 +5,7 @@ import {
   ItemDeserializer,
   RelationshipDeserializer,
 } from 'jsonapi-ts-deserializer';
-import useJsonApiFetch, { Fetch, JsonApiFetch, JsonApiResponse } from '../index';
+import { Fetch, getJsonApiFetch, JsonApiFetch, JsonApiResponse } from '../index';
 
 const jsonapiOrgExampleData = {
   links: {
@@ -436,7 +436,7 @@ describe('JsonApiFetch', () => {
     const deserializer: Deserializer = getDeserializer([articleDeserializer, personDeserializer, commentDeserializer]);
     const fetch = new FetchMock(new Response(JSON.stringify(jsonapiOrgExampleData)));
 
-    const jsonApiFetch: JsonApiFetch<Article> = useJsonApiFetch(fetch, '/does/not/matter', deserializer);
+    const jsonApiFetch: JsonApiFetch<Article> = getJsonApiFetch(fetch, '/does/not/matter', deserializer);
 
     jsonApiFetch.find({}, ['author', 'comments']).then((response: JsonApiResponse<Article>) => {
       expect(response).toMatchSnapshot();
@@ -447,7 +447,7 @@ describe('JsonApiFetch', () => {
     const deserializer: Deserializer = getDeserializer([articleDeserializer, personDeserializer, commentDeserializer]);
     const fetch = new FetchMock(new Response(JSON.stringify(jsonapiOrgExampleData2)));
 
-    const jsonApiFetch: JsonApiFetch<Article> = useJsonApiFetch(fetch, '/does/not/matter', deserializer);
+    const jsonApiFetch: JsonApiFetch<Article> = getJsonApiFetch(fetch, '/does/not/matter', deserializer);
 
     jsonApiFetch.find({}, []).then((response: JsonApiResponse<Article>) => {
       expect(response).toMatchSnapshot();
@@ -458,7 +458,7 @@ describe('JsonApiFetch', () => {
     const deserializer: Deserializer = getDeserializer([folderDeserializer, fileDeserializer]);
     const fetch = new FetchMock(new Response(JSON.stringify(fileSystemExampleData)));
 
-    const jsonApiFetch: JsonApiFetch<Folder> = useJsonApiFetch(fetch, '/does/not/matter', deserializer);
+    const jsonApiFetch: JsonApiFetch<Folder> = getJsonApiFetch(fetch, '/does/not/matter', deserializer);
 
     jsonApiFetch.find({}, ['children']).then((response: JsonApiResponse<Folder>) => {
       expect(response).toMatchSnapshot();
@@ -469,7 +469,7 @@ describe('JsonApiFetch', () => {
     const deserializer: Deserializer = getDeserializer([folderDeserializer, fileDeserializer]);
     const fetch = new FetchMock(new Response(JSON.stringify(fileSystemExampleData2)));
 
-    const jsonApiFetch: JsonApiFetch<Folder> = useJsonApiFetch(fetch, '/does/not/matter', deserializer);
+    const jsonApiFetch: JsonApiFetch<Folder> = getJsonApiFetch(fetch, '/does/not/matter', deserializer);
 
     jsonApiFetch.find({}, ['children']).then((response: JsonApiResponse<Folder>) => {
       expect(response).toMatchSnapshot();
@@ -480,7 +480,7 @@ describe('JsonApiFetch', () => {
     const deserializer: Deserializer = getDeserializer([folderDeserializer, fileDeserializer]);
     const fetch = new FetchMock(new Response(JSON.stringify(fileSystemExampleData3)));
 
-    const jsonApiFetch: JsonApiFetch<Folder> = useJsonApiFetch(fetch, '/does/not/matter', deserializer);
+    const jsonApiFetch: JsonApiFetch<Folder> = getJsonApiFetch(fetch, '/does/not/matter', deserializer);
 
     jsonApiFetch.findOne('1', []).then((response: JsonApiResponse<Folder>) => {
       expect(response).toMatchSnapshot();
