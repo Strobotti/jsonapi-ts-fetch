@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/Strobotti/jsonapi-ts-fetch/compare/v1.1.0...v1.2.0) (2023-06-04)
+
+
+### Features
+
+* deprecate useJsonApiFetch as this is not really a React hook ([df08c99](https://github.com/Strobotti/jsonapi-ts-fetch/commit/df08c9944f56c7bf741c132975f15038d452fdd2))
+
 # [1.1.0](https://github.com/Strobotti/jsonapi-ts-fetch/compare/v1.0.1...v1.1.0) (2023-05-30)
 
 

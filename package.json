@@ -1,6 +1,6 @@
 {
   "name": "jsonapi-ts-fetch",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "JSON:API fetch wrapper in Typescript",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
