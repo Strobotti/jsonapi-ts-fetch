@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/Strobotti/jsonapi-ts-fetch/compare/v1.2.0...v1.3.0) (2023-06-09)
+
+
+### Features
+
+* add fields -parameter ([faff396](https://github.com/Strobotti/jsonapi-ts-fetch/commit/faff396951027e5a29d8676c0a6f2ef0ac7aecaf))
+
 # [1.2.0](https://github.com/Strobotti/jsonapi-ts-fetch/compare/v1.1.0...v1.2.0) (2023-06-04)
 
 
