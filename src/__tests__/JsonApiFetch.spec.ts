@@ -5,7 +5,7 @@ import {
   ItemDeserializer,
   RelationshipDeserializer,
 } from 'jsonapi-ts-deserializer';
-import { Fetch, getJsonApiFetch, JsonApiFetch, JsonApiResponse } from '../index';
+import { buildRequestUrl, Fetch, getJsonApiFetch, JsonApiFetch, JsonApiResponse } from '../index';
 
 const jsonapiOrgExampleData = {
   links: {
@@ -485,5 +485,49 @@ describe('JsonApiFetch', () => {
     jsonApiFetch.findOne('1', []).then((response: JsonApiResponse<Folder>) => {
       expect(response).toMatchSnapshot();
     });
+  });
+});
+
+describe('buildRequestUrl', () => {
+  it('builds a request url with no query parameters', () => {
+    expect(buildRequestUrl('http://example.com', {}, [])).toEqual('http://example.com');
+  });
+
+  it('builds a request url with a single query parameter', () => {
+    expect(buildRequestUrl('http://example.com', { filters: { foo: 'bar' } }, [])).toEqual(
+      'http://example.com?filter[foo]=bar',
+    );
+  });
+
+  it('builds a request url with multiple query parameters', () => {
+    expect(buildRequestUrl('http://example.com', { filters: { foo: 'bar', baz: 'qux' } }, [])).toEqual(
+      'http://example.com?filter[foo]=bar&filter[baz]=qux',
+    );
+  });
+
+  it('builds a request url with a single include', () => {
+    expect(buildRequestUrl('http://example.com', {}, ['foo'])).toEqual('http://example.com?include=foo');
+  });
+
+  it('builds a request url with multiple includes', () => {
+    expect(buildRequestUrl('http://example.com', {}, ['foo', 'bar'])).toEqual('http://example.com?include=foo%2Cbar');
+  });
+
+  it('builds a request url with a single include and a single query parameter', () => {
+    expect(buildRequestUrl('http://example.com', { filters: { foo: 'bar' } }, ['baz'])).toEqual(
+      'http://example.com?filter[foo]=bar&include=baz',
+    );
+  });
+
+  it('builds a request url with sorting and pagination', () => {
+    expect(buildRequestUrl('http://example.com', { sort: ['name', '-email'], page: 1, limit: 10 }, [])).toEqual(
+      'http://example.com?page[number]=1&page[size]=10&sort=name%2C-email',
+    );
+  });
+
+  it('builds a request url with fields parameters set', () => {
+    expect(buildRequestUrl('http://example.com', { fields: { articles: ['title', 'body'] } }, [])).toEqual(
+      'http://example.com?fields[articles]=title%2Cbody',
+    );
   });
 });
