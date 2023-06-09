@@ -31,6 +31,9 @@ export type GetParams = {
   filters?: {
     [key: string]: any;
   };
+  fields?: {
+    [key: string]: string[];
+  };
 };
 
 export type JsonApiResponse<T> = {
@@ -53,6 +56,45 @@ export interface JsonApiFetch<T> {
 
 export type EntitySerializer<T> = {
   serialize: (entity: T) => JsonApiItem;
+};
+
+export const buildRequestUrl = (route: string, params: GetParams, includes: string[]): string => {
+  const paramsArray: string[] = [];
+
+  if (params.filters !== undefined) {
+    const filters = params.filters;
+
+    Object.keys(filters).forEach((key: string) => {
+      const val = filters[key] as string;
+      paramsArray.push(`filter[${key}]=${val}`);
+    });
+  }
+  if (params.fields !== undefined) {
+    const fields = params.fields;
+
+    Object.keys(fields).forEach((key: string) => {
+      const val = encodeURIComponent(fields[key].join(','));
+      paramsArray.push(`fields[${key}]=${val}`);
+    });
+  }
+  if (params.page !== undefined && params.page !== null) {
+    paramsArray.push(`page[number]=${params.page}`);
+  }
+  if (params.limit) {
+    paramsArray.push(`page[size]=${params.limit}`);
+  }
+  if (params.sort !== undefined) {
+    paramsArray.push(`sort=` + encodeURIComponent(params.sort.join(',')));
+  }
+  if (includes.length > 0) {
+    paramsArray.push(`include=` + encodeURIComponent(includes.join(',')));
+  }
+
+  if (paramsArray.length === 0) {
+    return route;
+  }
+
+  return route + '?' + paramsArray.join('&');
 };
 
 /**
@@ -83,30 +125,7 @@ export const getJsonApiFetch = <T>(
 
   return {
     find: (params: GetParams, includes: string[]): Promise<JsonApiResponse<T>> => {
-      const paramsArray: string[] = [];
-
-      if (params.filters !== undefined) {
-        const filters = params.filters;
-
-        Object.keys(filters).forEach((key: string) => {
-          const val = filters[key] as string;
-          paramsArray.push(`filter[${key}]=${val}`);
-        });
-      }
-      if (params.page !== undefined && params.page !== null) {
-        paramsArray.push(`page[number]=${params.page}`);
-      }
-      if (params.limit) {
-        paramsArray.push(`page[size]=${params.limit}`);
-      }
-      if (params.sort !== undefined) {
-        paramsArray.push(`sort=` + encodeURIComponent(params.sort.join(',')));
-      }
-      if (includes.length > 0) {
-        paramsArray.push(`include=` + encodeURIComponent(includes.join(',')));
-      }
-
-      const url = route + '?' + paramsArray.join('&');
+      const url = buildRequestUrl(route, params, includes);
 
       return fetch
         .get(url)
